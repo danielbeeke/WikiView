@@ -1,0 +1,15 @@
+{
+  "name": "harp.gl-01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "map.js",
+  "dependencies": {
+    "zwitterion": "^0.42.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "zwitterion --port 80"
+  },
+  "author": "",
+  "license": "ISC"
+}
