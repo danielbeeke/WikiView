@@ -1,3 +1,5 @@
+import {token} from './config.ts';
+
 const map = new harp.MapView({
   canvas: document.getElementById("map"),
   projection: harp.sphereProjection,
@@ -8,7 +10,7 @@ const omvDataSource = new harp.OmvDataSource({
   baseUrl: "https://xyz.api.here.com/tiles/herebase.02",
   apiFormat: harp.APIFormat.XYZOMV,
   styleSetName: "tilezen",
-  authenticationCode: "AZTCGaBcRICjgJrIWj61EAA",
+  authenticationCode: token,
 });
 map.addDataSource(omvDataSource);
 

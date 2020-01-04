@@ -8,6 +8,7 @@ import { Theme } from "@here/harp-datasource-protocol";
 import { MapControls } from "@here/harp-map-controls";
 import { CopyrightElementHandler, MapView } from "@here/harp-mapview";
 import { APIFormat, OmvDataSource } from "@here/harp-omv-datasource";
+import { token } from "./config.js";
 
 const defaultTheme = "resources/berlin_tilezen_base.json";
 
@@ -51,7 +52,7 @@ export class View {
             apiFormat: APIFormat.XYZOMV,
             styleSetName: "tilezen",
             maxZoomLevel: 17,
-            authenticationCode: "AZTCGaBcRICjgJrIWj61EAA"
+            authenticationCode: token
         });
         mapView.addDataSource(omvDataSource);
 
