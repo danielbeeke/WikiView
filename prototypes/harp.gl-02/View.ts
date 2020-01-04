@@ -8,7 +8,7 @@ import { Theme } from "@here/harp-datasource-protocol";
 import { MapControls } from "@here/harp-map-controls";
 import { CopyrightElementHandler, MapView } from "@here/harp-mapview";
 import { APIFormat, OmvDataSource } from "@here/harp-omv-datasource";
-import { token } from "./config.js";
+import { token } from "./config";
 
 const defaultTheme = "resources/berlin_tilezen_base.json";
 
@@ -35,17 +35,6 @@ export class View {
             theme: this.theme,
             decoderUrl: "decoder.bundle.js"
         });
-
-        CopyrightElementHandler.install("copyrightNotice")
-            .attach(mapView)
-            .setDefaults([
-                {
-                    id: "here.com",
-                    label: "HERE",
-                    link: "https://legal.here.com/terms",
-                    year: 2019
-                }
-            ]);
 
         const omvDataSource = new OmvDataSource({
             baseUrl: "https://xyz.api.here.com/tiles/herebase.02",
