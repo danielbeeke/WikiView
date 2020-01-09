@@ -60,7 +60,7 @@ export class MarkerGlobe {
         "renderOrder": 10000,
         "attr": {
           "color": "#5e0801",
-          "size": 5
+          "size": 10
         }
       }];
 
@@ -76,10 +76,6 @@ export class MarkerGlobe {
   setMarkers (GeoJSONFeatureCollection: any) {
     this.geoJsonDataProvider.updateInput(GeoJSONFeatureCollection);
     this.mapView.update();
-  }
-
-  get3dObject () {
-    return this.mapView.worldRootObject;
   }
 }
 

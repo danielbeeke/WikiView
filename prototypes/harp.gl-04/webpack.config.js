@@ -9,7 +9,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = [
     {
         entry: {
-            head: "./src/ts/App.ts",
+            app: "./src/ts/App.ts",
         },
         output: {
             filename: "[name].bundle.js",

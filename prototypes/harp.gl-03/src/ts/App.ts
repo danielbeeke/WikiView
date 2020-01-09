@@ -1,39 +1,14 @@
 import '../../scss/style.scss';
-import {WikiDataSparql} from './WikiDataSparql';
-import {battlesQuery} from './SparqlQueries';
-import {MarkerGlobe} from './MarkerGlobe';
+import 'aframe';
+import './AframeHarpGl.js';
 
-const canvas = document.createElement('canvas');
-canvas.id = 'map';
-document.body.appendChild(canvas);
-
-let map = new MarkerGlobe(canvas);
-let wikiData = new WikiDataSparql();
-
-wikiData.get(battlesQuery).then(GeoJSONFeatureCollection => {
-  GeoJSONFeatureCollection.features.forEach(feature => {
-    // @ts-ignore
-    feature.properties.visible = false;
-  });
-
-  map.setMarkers(GeoJSONFeatureCollection);
-
-  setTimeout(() => {
-    // @ts-ignore
-    GeoJSONFeatureCollection.features.forEach(feature => {
-      // @ts-ignore
-      feature.properties.visible = true;
-    });
-    map.setMarkers(GeoJSONFeatureCollection);
-
-    setTimeout(() => {
-      // @ts-ignore
-      GeoJSONFeatureCollection.features.forEach(feature => {
-        // @ts-ignore
-        feature.properties.visible = false;
-      });
-      map.setMarkers(GeoJSONFeatureCollection);
-    }, 4000)
-  }, 4000)
+window.addEventListener('DOMContentLoaded', (event) => {
+  document.body.innerHTML = `
+  <a-scene>
+      <a-entity harp></a-entity>
+      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+      <a-sky color="#ECECEC"></a-sky>
+  </a-scene>
+`;
 });
-
