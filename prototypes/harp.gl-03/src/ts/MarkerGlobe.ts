@@ -81,5 +81,10 @@ export class MarkerGlobe {
   get3dObject () {
     return this.mapView.worldRootObject;
   }
+
+  getCamera () {
+    return this.mapView.camera;
+  }
+
 }
 

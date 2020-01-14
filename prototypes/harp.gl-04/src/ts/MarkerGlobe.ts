@@ -53,8 +53,7 @@ export class MarkerGlobe {
       const styles: any = [{
         "when": [
           "all",
-          ["==", ["get", "$geometryType"], "point"],
-          ["==", ["get", "visible"], true]
+          ["==", ["get", "$geometryType"], "point"]
         ],
         "technique": "circles",
         "renderOrder": 10000,
