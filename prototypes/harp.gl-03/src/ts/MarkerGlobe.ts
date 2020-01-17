@@ -18,6 +18,7 @@ export class MarkerGlobe {
       canvas: canvas,
       // @ts-ignore
       theme: style,
+      // synchronousRendering: true,
       projection: sphereProjection,
       decoderUrl: 'decoder.bundle.js'
     });
@@ -84,6 +85,10 @@ export class MarkerGlobe {
 
   getCamera () {
     return this.mapView.camera;
+  }
+
+  getMap () {
+    return this.mapView;
   }
 
 }
