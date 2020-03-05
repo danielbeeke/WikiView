@@ -3,17 +3,31 @@ import {MapControls} from '@here/harp-map-controls';
 import {MapView} from '@here/harp-mapview';
 import {APIFormat, OmvDataSource} from '@here/harp-omv-datasource';
 import {token} from '../../config';
-import { sphereProjection } from "@here/harp-geoutils";
+import {sphereProjection} from "@here/harp-geoutils";
 import style from '../map-style.json';
 
-export class MarkerGlobe {
+export class AframeHarpGlobe {
+
+  // Real live size of globe.
+  private earthSize = 6371000;
 
   private mapView: any;
   private omvDataSource: any;
   private geoJsonDataSource: any;
   private geoJsonDataProvider: any;
+  private aframeElement: any;
 
-  constructor(canvas) {
+  constructor(aframeName, aframeElement) {
+    this.aframeElement = aframeElement;
+    const sceneCanvas = aframeElement.sceneEl.canvas;
+    const canvas = document.createElement('canvas');
+    canvas.width = sceneCanvas.width;
+    canvas.height = sceneCanvas.height;
+    const factor = 1 / this.earthSize;
+
+    // @ts-ignore
+    window.sync = () => this.syncCameras();
+
     this.mapView = new MapView({
       canvas: canvas,
       // @ts-ignore
@@ -22,6 +36,10 @@ export class MarkerGlobe {
       projection: sphereProjection,
       decoderUrl: 'decoder.bundle.js'
     });
+
+    this.globe.scale.set(factor, factor, factor);
+    this.globe.position.set(3,0,0);
+    aframeElement.setObject3D(aframeName, this.globe);
 
     this.omvDataSource = new OmvDataSource({
       baseUrl: 'https://xyz.api.here.com/tiles/herebase.02',
@@ -68,6 +86,10 @@ export class MarkerGlobe {
       this.geoJsonDataSource.setStyleSet(styles);
       this.mapView.update();
     });
+
+    setTimeout(() => {
+      this.syncCameras();
+    }, 200);
   }
 
   /**
@@ -79,16 +101,20 @@ export class MarkerGlobe {
     this.mapView.update();
   }
 
-  get3dObject () {
+  get globe () {
     return this.mapView.worldRootObject;
   }
 
-  getCamera () {
+  get harpCamera () {
     return this.mapView.camera;
   }
 
-  getMap () {
-    return this.mapView;
+  get aframeCamera () {
+    return this.aframeElement.sceneEl.camera;
+  }
+
+  syncCameras () {
+    console.log(this.harpCamera, this.aframeCamera)
   }
 
 }
